@@ -1,0 +1,60 @@
+ @import "base.less";
+ .navigation {
+ 	position: fixed;
+ 	width: 60px;
+ 	height: 100%;
+ 	background: @dgreen;
+ 	transition: 0.5s;
+ 	overflow: hidden;
+ 	ul {
+ 		position: absolute;
+ 		top: 0;
+ 		left: 0;
+ 		width: 100%;
+ 		li {
+ 			position: relative;
+ 			width: 100%;
+ 			list-style: none;
+ 			&:hover {
+ 				background: @sky;
+ 			}
+ 			&:nth-child(1) {
+ 				margin-bottom: 20px;
+ 				&:hover {
+ 					background: transparent;
+ 				}
+ 			}
+ 			a {
+ 				position: relative;
+ 				display: block;
+ 				display: flex;
+ 				width: 100%;
+ 				text-decoration: none;
+ 				color: @white;
+ 				.icon {
+ 					position: relative;
+ 					display: block;
+ 					min-width: 60px;
+ 					height: 60px;
+ 					line-height: 60px;
+ 					text-align: center;
+ 					.fa {
+ 						color: @white;
+ 						font-size: 24px;
+ 					}
+ 				}
+ 				.title {
+ 					position: relative;
+ 					display: block;
+ 					padding:0 10px;
+ 					height: 60px;
+ 					line-height: 60px;
+ 					white-space: nowrap;
+ 				}
+ 			}
+ 		}
+ 	}
+ }
+.navigation.active {
+ 	width: 300px;
+}

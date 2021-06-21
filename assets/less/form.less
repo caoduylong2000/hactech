@@ -1,0 +1,231 @@
+table{
+	thead{
+		background: #0C0303;
+		color: #E8E8E8;
+		tr{
+			td{
+				text-align: center;
+				padding: 0 20px;
+			}
+		}
+	}
+	tbody{
+		.btn_up{
+			position: relative;
+			display: inline-block;
+			padding: 5px 15px;
+			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 12px;
+			transition: 0.5s;
+			color: #565656;
+			background: #7FFF97;
+			&:hover{
+				color: #FDFDFD;
+			}
+		}
+		.btn_del{
+			position: relative;
+			display: inline-block;
+			padding: 5px 15px;
+			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 12px;
+			transition: 0.5s;
+			color: #565656;;
+			background: #FF4D62;
+			&:hover{
+				color: #FDFDFD;
+			}
+		}
+		.btn_info{
+			position: relative;
+			display: inline-block;
+			padding: 5px 15px;
+			text-decoration: none;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 12px;
+			transition: 0.5s;
+			color: #565656;;
+			background: #2E82FF;
+			&:hover{
+				color: #FDFDFD;
+			}
+		}
+	}
+}
+.btn{
+	position: relative;
+	display: inline-block;
+	padding: 10px 30px;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 16px;
+	transition: 0.5s;
+	background: #99AFFF;
+	margin-bottom: 20px;
+	&:hover{
+		color: #E9DFDF;
+		span{
+			&:nth-child(1){
+				transform: scaleY(1);
+				transform-origin: bottom;
+				transition: transform 0.5s;
+			}
+			&:nth-child(2){
+				transform: scaleX(1);
+				transform-origin: left;
+				transition: transform 0.5s;
+			}
+			&:nth-child(3){
+				transform: scaleY(1);
+				transform-origin: bottom;
+				transition: transform 0.5s;
+			}
+			&:nth-child(4){
+				transform: scaleX(1);
+				transform-origin: left;
+				transition: transform 0.5s;
+			}
+		}
+	}
+	span{
+		display: block;
+		position: absolute;
+		background: #1E0DFF;
+		&:nth-child(1){
+			left: 0;
+			bottom: 0;
+			width: 1px;
+			height: 100%;
+			transform: scaleY(0);
+			transform-origin: top;
+			transition: transform 0.5s;
+		}
+		&:nth-child(2){
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 1px;
+			transform: scaleX(0);
+			transform-origin: right;
+			transition: transform 0.5s;
+		}
+		&:nth-child(3){
+			right: 0;
+			bottom: 0;
+			width: 1px;
+			height: 100%;
+			transform: scaleY(0);
+			transform-origin: top;
+			transition: transform 0.5s;
+		}
+		&:nth-child(4){
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 1px;
+			transform: scaleX(0);
+			transform-origin: right;
+			transition: transform 0.5s;
+		}
+	}
+}
+form{
+	width: 80%;
+	margin: auto;
+	h2{
+		width: 100%;
+		font-size: 36px;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.row100{
+		position: relative;
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+		.col{
+			position: relative;
+			width: 100%;
+			padding: 0 10px;
+			margin: 30px 0 10px;
+			transition: 0.5s;
+		}
+		.inputBox{
+			position: relative;
+			width: 100%;
+			height: 40px;
+			input, select{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background: transparent;
+				box-shadow: none;
+				border: none;
+				outline: none;
+				font-size: 18px;
+				padding: 0 10px;
+				z-index: 1;
+			}
+			.text{
+				position: absolute;
+				top: 0;
+				left: 0;
+				line-height: 40px;
+				font-size: 18px;
+				padding: 0 10px;
+				display: block;
+				transition: 0.5s;
+				pointer-events: none;
+			}
+			.text-select{
+				position: absolute;
+				top: -35px;
+				left: -10px;
+				line-height: 40px;
+				font-size: 18px;
+				padding: 0 10px;
+				display: block;
+				transition: 0.5s;
+				pointer-events: none;
+			}
+			input:focus + .text,
+			input:valid + .text{
+				top: -35px;
+				left: -10px;
+			}
+			.line{
+				position: absolute;
+				bottom: 0;
+				display: block;
+				width: 100%;
+				transition: 0.5s;
+				border-radius: 2px;
+				pointer-events: none;
+				background: #646464;
+			}
+			input:focus ~ .line,
+			input:valid ~ .line{
+				height: 2px;
+			}
+		}
+	}
+	input[type="submit"]{
+		border: none;
+		padding: 7px 35px;
+		cursor: pointer;
+		outline: none;
+		background: #99AFFF;
+		transition: 0.5s;
+		font-size: 18px;
+		border-radius: 2px;
+		&:hover{
+			color: #E9DFDF;
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@import "base.less";
+@import "topbar.less";
+@import "form.less";
+@import "adpage.less";
+.main {
+ 	position: absolute;
+ 	width: calc(100% - 60px);
+ 	left: 60px;
+ 	min-height: 100vh;
+ 	background: @cloud;
+ 	transition: 0.5s;
+ 	.contain {
+ 		display: flex;
+ 		width: 100%;
+ 		padding: 25px;
+  	}
+}
+.main.active {
+ 	width: calc(100% - 300px);
+ 	left: 300px;
+}
