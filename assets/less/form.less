@@ -10,49 +10,52 @@ table{
 		}
 	}
 	tbody{
-		.btn_up{
-			position: relative;
-			display: inline-block;
-			padding: 5px 15px;
-			text-decoration: none;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			font-size: 12px;
-			transition: 0.5s;
-			color: #565656;
-			background: #7FFF97;
-			&:hover{
-				color: #FDFDFD;
+		td{
+			padding: 0 10px;
+				.btn_up{
+					position: relative;
+					display: inline-block;
+					padding: 5px 15px;
+					text-decoration: none;
+					text-transform: uppercase;
+					letter-spacing: 2px;
+					font-size: 12px;
+					transition: 0.3s;
+					color: #565656;
+					background: #7FFF97;
+					&:hover{
+						color: #FDFDFD;
+					}
+				}
+			.btn_del{
+				position: relative;
+				display: inline-block;
+				padding: 5px 15px;
+				text-decoration: none;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				font-size: 12px;
+				transition: 0.3s;
+				color: #565656;;
+				background: #FF4D62;
+				&:hover{
+					color: #FDFDFD;
+				}
 			}
-		}
-		.btn_del{
-			position: relative;
-			display: inline-block;
-			padding: 5px 15px;
-			text-decoration: none;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			font-size: 12px;
-			transition: 0.5s;
-			color: #565656;;
-			background: #FF4D62;
-			&:hover{
-				color: #FDFDFD;
-			}
-		}
-		.btn_info{
-			position: relative;
-			display: inline-block;
-			padding: 5px 15px;
-			text-decoration: none;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			font-size: 12px;
-			transition: 0.5s;
-			color: #565656;;
-			background: #2E82FF;
-			&:hover{
-				color: #FDFDFD;
+			.btn_info{
+				position: relative;
+				display: inline-block;
+				padding: 5px 15px;
+				text-decoration: none;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				font-size: 12px;
+				transition: 0.3s;
+				color: #565656;;
+				background: #2E82FF;
+				&:hover{
+					color: #FDFDFD;
+				}
 			}
 		}
 	}
@@ -135,9 +138,38 @@ table{
 		}
 	}
 }
+.page-item{
+		position: relative;
+		display: inline-block;
+		padding: 4px 12px;
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		font-size: 10px;
+		transition: 0.3s;
+		background: #1E1E1E;
+		color: #E9DFDF;
+		margin: 0 4px 20px;
+		&:hover{
+			background: #3DFF98;
+			color: #1E1E1E;
+			}
+}
+.btn_search{
+	position: relative;
+	display: inline-block;
+	padding: 4px;
+	text-decoration: none;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 8px;
+	transition: 0.5s;
+	background: #99AFFF;
+	margin-bottom: 20px;
+}
 form{
-	width: 80%;
-	margin: auto;
+	max-width: 100%;
+	
 	h2{
 		width: 100%;
 		font-size: 36px;

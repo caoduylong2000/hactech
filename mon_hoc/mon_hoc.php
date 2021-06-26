@@ -12,7 +12,7 @@
 
 		public function insert($ma, $name, $nganh, $hocki) {
 			try {
-				$sql = "INSERT INTO mon_hoc(ma_mon, ten_mon, ma_nganh, hoc_ki) VALUES (:ma, :name, :nganh, :hocki)";
+				$sql = "INSERT INTO mon_hoc VALUES (:ma, :name, :nganh, :hocki)";
 				
 				$stmt = $this->db->prepare($sql);
 
@@ -68,7 +68,7 @@
 
 		public function update($id, $ma, $name, $nganh, $hocki) {
 			try {
-				$sql = "UPDATE mon_hoc SET ma_mon = :ma, ten_mon = :name, ma_nganh = :nganh, hoc_ki = :hocki WHERE mon_id = :id";
+				$sql = "UPDATE mon_hoc SET ma_mon = :ma, ten_mon = :name, ma_nganh = :nganh, hoc_ki = :hocki WHERE mon_hoc_id = :id";
 
 				$stmt = $this->db->prepare($sql);
 
@@ -88,7 +88,7 @@
 
 		public function delete($id) {
 			try {
-				$sql = "DELETE FROM mon_hoc WHERE mon_id = :id";
+				$sql = "DELETE FROM mon_hoc WHERE mon_hoc_id = :id";
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindparam(":id", $id);
 				$stmt->execute();

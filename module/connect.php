@@ -53,7 +53,4 @@
 		require_once '../hoc_phi/hoc_phi.php';
 		$hocphi = new Hocphi($pdo);
 
-		require_once '../Classes/PHPExcel.php';
-		$objPHPExcel = new PHPExcel($pdo);
-
 	?>

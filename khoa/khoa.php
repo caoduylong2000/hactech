@@ -88,9 +88,13 @@
 		public function delete($ma) {
 			try {
 				$sql = "DELETE FROM khoa WHERE ma_khoa = :ma";
+				$sql2 = "DELETE FROM chuyen_nganh WHERE ma_khoa = :ma";
 				$stmt = $this->db->prepare($sql);
+				$stmt2 = $this->db->prepare($sql2);
 				$stmt->bindparam(":ma", $ma);
+				$stmt2->bindparam(":ma", $ma);
 				$stmt->execute();
+				$stmt2->execute();
 				return true;
 			} catch (Exception $e) {
 				echo $e->getMessage();

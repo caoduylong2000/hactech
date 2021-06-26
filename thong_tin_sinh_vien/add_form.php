@@ -65,7 +65,7 @@ if(isset($_POST['ok'])) {
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<input type="text" name="sdt" required="required" pattern="[0-9]{11}">
+					<input type="text" name="sdt" required="required">
 					<span class="text">Số điện thoại</span>
 					<span class="line"></span>
 				</div>

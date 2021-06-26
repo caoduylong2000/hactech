@@ -43,7 +43,6 @@
 				$stmt->execute();
 				$result = $stmt->fetch();
 				return $result;
-				$success = 'User has been created successfully';
 			} catch (Exception $e) {
 				echo $e->getMessage();
 				return false;

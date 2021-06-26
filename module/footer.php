@@ -46,6 +46,9 @@
     $(document).ready(function() {
     	$('#topbar').load("../module/topbar.html");
     });
+     $(document).ready(function() {
+    	$('pageMenu').load("../module/pagebar.html");
+    });
 	</script>
 </body>
 </html>
