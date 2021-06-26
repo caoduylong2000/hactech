@@ -62,5 +62,5 @@ else
 }
 
 echo $message;
-
+header("Location: view_form.php");
 ?>

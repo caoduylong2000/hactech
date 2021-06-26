@@ -26,12 +26,14 @@ if($_FILES["import_excel"]["name"] != '')
 		foreach($data as $row)
 		{
 			$insert_data = array(
-				':ma_phong'		    =>	$row[0],
-				':mo_ta'			=>	$row[1]
+				':ma_nganh'	    	=>	$row[0],
+				':ten_nganh'		=>	$row[1],
+				':ma_khoa'			=>	$row[2]
+
 			);
 
 			$query = 
-			"INSERT INTO phong_hoc VALUES (:ma_phong, :mo_ta)";
+			"INSERT INTO chuyen_nganh VALUES (:ma_nganh, :ten_nganh, :ma_khoa)";
 
 			$statement = $pdo->prepare($query);
 			$statement->execute($insert_data);

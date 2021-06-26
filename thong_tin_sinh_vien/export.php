@@ -35,5 +35,5 @@ if(isset($_POST["file_content"]))
 
 	exit;
 }
-
+header("Location: view_form.php");
 ?>

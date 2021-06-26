@@ -54,20 +54,6 @@ if (!empty($where)) {
 			<span></span>
 			ADD
 		</a>
-		<a href="import_data.php" class="btn">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			IMPORT
-		</a>
-		<a href="" class="btn">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			EXPORT
-		</a>
 	</div>
 	<div class="search">
 		<form action="view_form.php?action=search" method="POST">

@@ -67,13 +67,6 @@ if (!empty($where)) {
 			<span></span>
 			IMPORT
 		</a>
-		<a href="" class="btn">
-			<span></span>
-			<span></span>
-			<span></span>
-			<span></span>
-			EXPORT
-		</a>
 	</div>
 	<div class="search">
 		<form action="view_form.php?action=search" method="POST">
@@ -107,7 +100,7 @@ if (!empty($where)) {
 					<td> <?php echo $r['ten_lop']; ?> (<?php echo $r['ma_lop']; ?>)</td>
 					<td> <?php echo $r['ten_mon']; ?> </td>
 					<td> <?php echo $r['gvpt']; ?> </td>
-					<td> <?php echo $r['hoc_ki']; ?> </td>
+					<td> <?php echo $r['ma_hoc_ki']; ?> </td>
 					<td>
 						<a class="btn_info" href="../chi_tiet_bang_diem/view_form.php?id=<?php echo $r['bang_diem_id']; ?> ">Details</a>
 						<a class="btn_up" href="update_form.php?id=<?php echo $r['bang_diem_id']; ?> ">Update</a>

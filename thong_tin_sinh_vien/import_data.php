@@ -1,4 +1,5 @@
-<?php require_once '../module/dautrang.php'; ?>
+<?php $title = 'Import';
+require_once '../module/dautrang.php'; ?>
           <div class="panel-body">
         		<div class="table-responsive">
         			<span id="message"></span>
