@@ -1,7 +1,7 @@
 <?php
 
 //import.php
-
+require_once '../module/connect.php';
 include '../module/vendor/autoload.php';
 
 if($_FILES["import_excel"]["name"] != '')
@@ -32,7 +32,7 @@ if($_FILES["import_excel"]["name"] != '')
 				':hoc_ki'			=>	$row[3]
 
 			);
-
+			
 			$query = 
 			"INSERT INTO mon_hoc VALUES (:ma_mon, :ten_mon, :ma_nganh, :hoc_ki)";
 

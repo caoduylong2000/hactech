@@ -1,7 +1,7 @@
 <?php
 
 //import.php
-
+require_once '../module/connect.php';
 include '../module/vendor/autoload.php';
 
 if($_FILES["import_excel"]["name"] != '')
