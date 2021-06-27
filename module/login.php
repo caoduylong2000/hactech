@@ -6,7 +6,7 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$user = $_POST['user'];
 		$pass = $_POST['pass'];
-		$new_pass = md5($pass.$user);
+		$new_pass = md5($pass);
 		if ($user == 'admin' && $pass == 'password') {
 			header("location: ../module/admin.php");
 		} else {

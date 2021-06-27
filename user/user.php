@@ -16,7 +16,7 @@
 				if ($result['num'] > 0) {
 					return false;
 				} else {
-					$new_pass = md5($pass.$user);
+					$new_pass = md5($pass);
 					$sql = "INSERT INTO tai_khoan VALUES (:user, :pass, :masv)";
 
 					$stmt = $this->db->prepare($sql);
@@ -101,7 +101,7 @@
 				$sql = "UPDATE tai_khoan SET password = :pass WHERE ma_sinh_vien = :masv";
 
 				$stmt = $this->db->prepare($sql);
-				$new_pass = md5($pass.$masv);
+				$new_pass = md5($pass);
 				$stmt->bindparam(':pass', $new_pass);
 				$stmt->bindparam(':masv', $masv);
 

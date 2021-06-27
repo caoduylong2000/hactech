@@ -30,7 +30,7 @@
 					$stmt->bindparam(':email', $email);
 					$stmt->execute();
 
-					$new_pass = md5($masv.$masv);
+					$new_pass = md5($masv);
 					$stmt2->bindparam(':user', $masv);
 					$stmt2->bindparam(':pass', $new_pass);
 					$stmt2->bindparam(':masv', $masv);
