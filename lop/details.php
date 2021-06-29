@@ -11,17 +11,19 @@ if (!isset($_GET['id'])) {
 	  	$id = $_GET['id'];
 	  	$result = $lop->details($id);
 	  	$list = $lop->listSV($id);
+	  	
 	  } ?>
 	
 	<form>
 		<h2>Thông tin lớp học</h2>
 		<div class="row100">
 			<div class="col">
+				<?php $sosv = $lop->getSoSV($result['ma_lop']); ?>
 			  	<p><b>Mã lớp:</b> <?php echo $result['ma_lop']; ?></p>
 				<p><b>Tên Lớp:</b> <?php echo $result['ten_lop']; ?></p>
 				<p><b>Chuyên ngành:</b> <?php echo $result['ten_nganh']; ?></p>
 				<p><b>Giáo viên chủ nhiệm:</b> <?php echo $result['gvcn']; ?></p>
-				<p><b>Số sinh viên:</b> <?php echo $result['so_sinh_vien']; ?></p>
+				<p><b>Số sinh viên:</b> <?php echo $sosv[0]; ?></p>
 				<p><b>Khóa học:</b> K<?php echo $result['khoa_hoc']; ?></p>
 			</div>
 		</div>

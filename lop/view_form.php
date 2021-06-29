@@ -24,7 +24,6 @@ if (!empty($_SESSION['filter'])) {
 	extract($_SESSION['filter']);
 }
 
-
 $data_per_page = 20;
 $current_page = !empty($_GET['page'])?$_GET['page']:1;
 $offset = ($current_page - 1) * $data_per_page;
@@ -54,14 +53,14 @@ if (!empty($where)) {
 			<span></span>
 			ADD
 		</a>
-		<a href="" class="btn">
+		<a href="import_data.php" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			IMPORT
 		</a>
-		<a href="" class="btn">
+		<a href="export_data.php" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -96,11 +95,12 @@ if (!empty($where)) {
 		<tbody>
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 			<tr>
+				<?php $sosv = $lop->getSoSV($r['ma_lop']); ?>
 				<td> <?php echo $r['ma_lop']; ?> </td>
 				<td> <?php echo $r['ten_lop']; ?> </td>
-				<td> <?php echo $r['ten_nganh']; ?> </td>
+				<td> <?php echo $r['ma_nganh']; ?> </td>
 				<td> <?php echo $r['gvcn']; ?> </td>
-				<td> <?php echo $r['so_sinh_vien']; ?> </td>
+				<td> <?php echo $sosv[0];?></td>
 				<td> Khóa <?php echo $r['khoa_hoc']; ?> </td>
 				<td>
 					<a class="btn_info" href="details.php?id=<?php echo $r['lop_id']; ?> ">Details</a>	

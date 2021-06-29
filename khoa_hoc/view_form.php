@@ -70,7 +70,6 @@ if (!empty($where)) {
 	<table>
 		<thead>
 			<tr>
-				<td>ID</td>
 				<td>Mã Khóa Học</td>
 				<td>Thời gian bắt đầu</td>
 				<td>Thời gian kết thúc</td>
@@ -80,8 +79,7 @@ if (!empty($where)) {
 		<tbody>
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 			<tr>
-				<td> <?php echo $r['khoa_hoc_id']; ?> </td>
-				<td> <?php echo $r['ma_khoa_hoc']; ?> </td>
+				<td> Khóa <?php echo $r['ma_khoa_hoc']; ?> </td>
 				<td> <?php echo $r['bat_dau']; ?> </td>
 				<td> <?php echo $r['ket_thuc']; ?> </td>
 				<td>

@@ -97,7 +97,7 @@ if (!empty($where)) {
 			<tr>
 				<td> <?php echo $r['ma_sinh_vien']; ?> </td>
 				<td> <?php echo $r['ten_sinh_vien']; ?> </td>
-				<td> <?php echo $r['ten_lop']; ?> - <?php echo $r['ma_lop']; ?></td>
+				<td> <!-- <?php echo $r['ten_lop']; ?> -  --><?php echo $r['ma_lop']; ?></td>
 				<td> <?php echo $r['dia_chi']; ?> </td>
 				<td> <?php echo $r['so_dien_thoai']; ?> </td>
 				<td> <?php echo $r['email']; ?> </td>

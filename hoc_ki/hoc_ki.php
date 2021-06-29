@@ -10,17 +10,17 @@
 			$this->db = $conn;
 		}
 
-		public function insert($hk, $date_start, $date_end, $khoa_hoc) {
+		public function insert($hk, $khoa_hoc, $date_start, $date_end) {
 			try {
-				$sql = "INSERT INTO hoc_ki VALUES (:hk, :date_start, :date_end, :khoa_hoc)";
+				$sql = "INSERT INTO hoc_ki VALUES (:hk, :khoa_hoc, :date_start, :date_end )";
 
 				$stmt = $this->db->prepare($sql);
 
 				$stmt->bindparam(':hk', $hk);
+				$stmt->bindparam(':khoa_hoc', $khoa_hoc);
 				$stmt->bindparam(':date_start', $date_start);
 				$stmt->bindparam(':date_end', $date_end);
-				$stmt->bindparam(':khoa_hoc', $khoa_hoc);
-
+				
 				$stmt->execute();
 				return true;
 			} catch (Exception $e) {

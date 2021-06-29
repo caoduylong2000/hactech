@@ -36,10 +36,10 @@
 
 		public function getUser($user, $pass) {
 			try {
-				$sql = "SELECT * FROM tai_khoan WHERE username = :user AND password = :pass";
+				$sql = "SELECT * FROM tai_khoan WHERE username = :username AND password = :password";
 				$stmt = $this->db->prepare($sql);
-				$stmt->bindParam(':user', $user);
-				$stmt->bindParam(':pass', $pass);
+				$stmt->bindParam(':username', $user);
+				$stmt->bindParam(':password', $pass);
 				$stmt->execute();
 				$result = $stmt->fetch();
 				return $result;

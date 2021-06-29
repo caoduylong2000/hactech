@@ -32,9 +32,8 @@ if($_FILES["import_excel"]["name"] != '')
 				':hoc_ki'			=>	$row[3]
 
 			);
-			
 			$query = 
-			"INSERT INTO mon_hoc VALUES (:ma_mon, :ten_mon, :ma_nganh, :hoc_ki)";
+			"INSERT INTO mon_hoc(ma_mon, ten_mon, ma_nganh, hoc_ki) VALUES (:ma_mon, :ten_mon, :ma_nganh, :hoc_ki)";
 
 			$statement = $pdo->prepare($query);
 			$statement->execute($insert_data);
@@ -53,5 +52,4 @@ else
 }
 
 echo $message;
-header("Location: view_form.php");
 ?>

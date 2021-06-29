@@ -4,7 +4,7 @@ require_once '../module/connect.php';
 require_once '../module/dautrang.php'; 
 
 
-if(isset($_POST['ok'])) {
+if(isset($_POST['add'])) {
 	  	$masv = $_POST['masv'];
 	  	$ten = $_POST['ten'];
 	  	$lop = $_POST['lop']; 
@@ -21,9 +21,7 @@ if(isset($_POST['ok'])) {
 	  	}
 	  }
 
-	  $lop1 = $diem->getLop();
-
-  $thongtin = $user->getTT();
+	$lop1 = $diem->getLop();
 ?>
 	<form action="add_form.php" method="POST">
 		<h2>Thêm mới dữ liệu</h2>
@@ -37,7 +35,7 @@ if(isset($_POST['ok'])) {
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<input type="text" name="password" required="required">
+					<input type="text" name="ten" required="required">
 					<span class="text">Tên sinh viên</span>
 					<span class="line"></span>
 				</div>

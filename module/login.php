@@ -4,18 +4,19 @@
 	include_once 'session.php';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$user = $_POST['user'];
-		$pass = $_POST['pass'];
-		$new_pass = md5($pass);
+		$user = $_POST['username'];
+		$pass = $_POST['password'];
 		if ($user == 'admin' && $pass == 'password') {
 			header("location: ../module/admin.php");
 		} else {
-			$log = $user->getUser($user, $new_pass);
+			$newpass = md5($pass);
+			$log = $user->getUser($user, $newpass);
+
 			if (!$log) {
 				echo "<script>alert ('Sai thông tin đăng nhập');</script>";
 			} else {
-				$_SESSION['user'] = $user;
-				$_SESSION['log_id'] = $log['account_id'];
+				/*$_SESSION['user'] = $user;
+				$_SESSION['log_id'] = $log['account_id'];*/
 				header("location: index.php");
 			}
 		}
@@ -44,11 +45,11 @@
 				<form method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>">
 					<div class="inputBx">
 						<label for="user">Tên đăng nhập</label>
-						<input type="text" name="user" value="<?php if($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['user']?>">
+						<input type="text" name="username" value="<?php if($_SERVER['REQUEST_METHOD'] == 'POST') echo $_POST['username']?>">
 					</div>
 					<div class="inputBx">
 						<label for="pass">Mật khẩu</label>
-						<input type="password" name="pass">
+						<input type="password" name="password">
 					</div>
 					<div class="remember">
 						<label><input type="checkbox" name="remember"> Remember me</label>

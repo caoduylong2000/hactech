@@ -17,6 +17,9 @@ if (!empty($_SESSION['filter'])) {
 				case 'ten_mon':
 					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
 					break;
+				case 'hoc_ki':
+					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
+					break;
 				default:
 					$where .= (!empty($where))? " AND "."".$field." =".$value."" : "".$field." =".$value."";
 					break;
@@ -76,6 +79,7 @@ if (!empty($where)) {
 			<fieldset>
 				<legend>Tra cứu</legend>
 				Tên môn: <input type="text" name="ten_mon" value="<?=!empty($ten_mon)?$ten_mon:""?>">
+				Học kì: <input type="text" name="hoc_ki" value="<?=!empty($hoc_ki)?$hoc_ki:""?>">
 				<input type="submit" class="btn_search" value="Tìm">
 			</fieldset>			
 		</form>
@@ -98,10 +102,10 @@ if (!empty($where)) {
 			<tr>
 				<td> <?php echo $r['ma_mon']; ?> </td>
 				<td> <?php echo $r['ten_mon']; ?> </td>
-				<td> <?php echo $r['ten_nganh']; ?> </td>
+				<td> <?php echo $r['ma_nganh']; ?> </td>
 				<td> <?php echo $r['hoc_ki']; ?> </td>
 				<td>
-					<a class="btn_info"href="detail.php?id=<?php echo $r['mon_hoc_id']; ?> ">Details</a>
+					<!-- <a class="btn_info"href="detail.php?id=<?php echo $r['mon_hoc_id']; ?> ">Details</a> -->
 					<a class="btn_up"href="update_form.php?id=<?php echo $r['mon_hoc_id']; ?> ">Update</a>
 					<a class="btn_del"href="delete.php?id=<?php echo $r['mon_hoc_id']; ?> ">Delete</a>
 				</td>

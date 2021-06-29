@@ -42,7 +42,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="mamon">
 						<?php while ($m = $mon1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $m['ma_mon'] ?> "><?php echo $m['ten_mon']; ?></option>
+							<option value="<?php echo $m['ma_mon'] ?> "><?php echo $m['ten_mon']; ?> - <?php echo $m['ma_mon'] ?></option>
 						<?php } ?>				
 					</select>
 					<span class="text-select">Tên môn</span>

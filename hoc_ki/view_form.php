@@ -70,7 +70,7 @@ if (!empty($where)) {
 	<table>
 		<thead>
 			<tr>
-				<td>ID</td>
+				
 				<td>Hoc kì</td>
 				<td>Thời gian bắt đầu</td>
 				<td>Thời gian kết thúc</td>
@@ -81,15 +81,15 @@ if (!empty($where)) {
 		<tbody>
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 				<tr>
-					<td> <?php echo $r['hoc_ki_id']; ?> </td>
-					<td> <?php echo $r['ma_hoc_ki']; ?> </td>
+					
+					<td> <?php echo $r['hoc_ki']; ?> </td>
 					<td> <?php echo $r['bat_dau']; ?> </td>
 					<td> <?php echo $r['ket_thuc']; ?> </td>
 					<td> Khóa <?php echo $r['khoa_hoc']; ?> </td>
 					<td>
-						<a class="btn_info" href="detail.php?id=<?php echo $r['hoc_ki_id']; ?> ">Details</a>
-						<a class="btn_up" href="update_form.php?id=<?php echo $r['hoc_ki_id']; ?> ">Update</a>
-						<a class="btn_del" href="delete.php?id=<?php echo $r['hoc_ki_id']; ?> ">Delete</a>
+						<!-- <a class="btn_info" href="detail.php?id=<?php echo $r['hoc_ki']; ?> ">Details</a> -->
+						<a class="btn_up" href="update_form.php?id=<?php echo $r['hoc_ki']; ?> ">Update</a>
+						<a class="btn_del" href="delete.php?id=<?php echo $r['hoc_ki']; ?> ">Delete</a>
 					</td>
 				</tr>
 		<?php } ?>

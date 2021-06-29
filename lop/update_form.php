@@ -12,7 +12,7 @@ require_once '../module/connect.php';
 ?>
 <form method="POST" action="update_post.php"> 
 	<h2>Cập nhật dữ liệu</h2> 
-		<input type="hidden" name="id" value="<?php echo $result['lop_id']; ?>">
+	<input type="hidden" value="<?php echo $result['lop_id']; ?>" name="id">
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">
@@ -30,13 +30,6 @@ require_once '../module/connect.php';
 			</div>
 		</div>
 		<div class="row100">
-			<div class="col">
-				<div class="inputBox">
-					<input type="text" value="<?php echo $result['so_sinh_vien']; ?>" name="sosv">
-					<span class="text">Số sinh viên</span>
-					<span class="line"></span>
-				</div>
-			</div>
 			<div class="col">
 				<div class="inputBox">
 					<input type="text" value="<?php echo $result['ten_lop']; ?>" name="tenlop">

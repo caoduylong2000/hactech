@@ -2,7 +2,7 @@
 require_once '../module/dautrang.php'; 
 require_once '../module/connect.php'; 
 
-	if(isset($_POST['ok'])) {
+	if(isset($_POST['add'])) {
 	  	$khoa = $_POST['khoa'];
 	  	$start = $_POST['batdau'];
 	  	$end = $_POST['ketthuc']; 

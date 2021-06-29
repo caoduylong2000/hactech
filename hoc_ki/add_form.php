@@ -5,12 +5,11 @@ require_once '../module/connect.php';
 	if(isset($_POST['add'])) {
 
 	  	$hk = $_POST['mahocki'];
+	  	$khoahoc = $_POST['khoahoc']; 
 	  	$start = $_POST['batdau'];
 	  	$end = $_POST['ketthuc']; 
-	  	$khoahoc = $_POST['khoahoc']; 
 
-	  	$isSuccess = $hocki->insert($hk, $start, $end, $khoahoc);
-
+	  	$isSuccess = $hocki->insert($hk, $khoahoc, $start, $end);
 	  	if ($isSuccess) {
 	  		header("Location: view_form.php");
 	  	} else {

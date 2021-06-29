@@ -10,17 +10,16 @@
 			$this->db = $conn;
 		}
 
-		public function insert($ma, $ten, $nganh, $gv, $sosv, $khoahoc) {
+		public function insert($ma, $ten, $nganh, $gv, $khoahoc) {
 			try {
-				$sql = "INSERT INTO lop (ma_lop, ten_lop, ma_nganh, gvcn, so_sinh_vien, khoa_hoc) VALUES (:ma, :ten, :nganh, :gv, :sosv, :khoahoc)";
+				$sql = "INSERT INTO lop (ma_lop, ten_lop, ma_nganh, gvcn, khoa_hoc) VALUES (:ma, :ten, :nganh, :gv, :khoahoc)";
 
 				$stmt = $this->db->prepare($sql);
-
+				
 				$stmt->bindparam(':ma', $ma);
 				$stmt->bindparam(':ten', $ten);
 				$stmt->bindparam(':nganh', $nganh);
 				$stmt->bindparam(':gv', $gv);
-				$stmt->bindparam(':sosv', $sosv);
 				$stmt->bindparam(':khoahoc', $khoahoc);
 
 				$stmt->execute();
@@ -56,6 +55,20 @@
 			}
 		}
 
+		public function getSoSV($lop){
+			try {
+				$sql = "SELECT COUNT(ma_sinh_vien) FROM thong_tin_sinh_vien tt INNER JOIN lop l ON tt.ma_lop = l.ma_lop WHERE l.ma_lop = :ma_lop " ;
+				$stmt = $this->db->prepare($sql);
+				$stmt->bindparam(":ma_lop", $lop);
+				$stmt->execute();
+				$result = $stmt->fetch();
+				return $result;
+			} catch (Exception $e) {
+				echo $e->getMessage();
+				return false;
+			}
+		}
+
 		public function listSV($id){
 			try {
 				$sql = "SELECT * FROM thong_tin_sinh_vien tt LEFT JOIN lop l ON tt.ma_lop = l.ma_lop
@@ -82,9 +95,9 @@
 			return $result;
 		}
 
-		public function update($id, $ma, $ten, $nganh, $gv, $sosv, $khoahoc) {
+		public function update($id, $ma, $ten, $nganh, $gv, $khoahoc) {
 			try {
-				$sql = "UPDATE lop SET ma_lop = :ma, ten_lop = :ten, chuyen_nganh = :nganh, gvcn = :gv, so_sinh_vien = :sosv, khoa_hoc = :khoahoc WHERE lop_id = :id";
+				$sql = "UPDATE lop SET ma_lop = :ma, ten_lop = :ten, ma_nganh = :nganh, gvcn = :gv,  khoa_hoc = :khoahoc WHERE lop_id = :id";
 
 				$stmt = $this->db->prepare($sql);
 
@@ -93,7 +106,7 @@
 				$stmt->bindparam(':ten', $ten);
 				$stmt->bindparam(':nganh', $nganh);
 				$stmt->bindparam(':gv', $gv);
-				$stmt->bindparam(':sosv', $sosv);
+				
 				$stmt->bindparam(':khoahoc', $khoahoc);
 
 				$stmt->execute();

@@ -7,9 +7,9 @@ require_once '../module/connect.php';
 	  	$ten = $_POST['tenlop'];
 	  	$nganh = $_POST['nganh']; 
 	  	$gvcn = $_POST['gvcn']; 
-	  	$sosv = $_POST['sosv']; 
+	  	$sosv = $lop->getSoSV($ma);
 	  	$khoahoc = $_POST['khoahoc']; 
-
+	  	
 	  	$isSuccess = $lop->insert($ma, $ten, $nganh, $gvcn, $sosv, $khoahoc);
 
 	  	if ($isSuccess) {
@@ -47,13 +47,6 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<input type="text" name="gvcn" required="required">
 					<span class="text">Giáo viên chủ nhiệm</span>
-					<span class="line"></span>
-				</div>
-			</div>
-			<div class="col">
-				<div class="inputBox">
-					<input type="number" name="sosv" required="required">
-					<span class="text">Số sinh viên</span>
 					<span class="line"></span>
 				</div>
 			</div>
