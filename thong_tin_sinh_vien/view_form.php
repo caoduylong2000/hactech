@@ -15,6 +15,9 @@ if (!empty($_SESSION['filter'])) {
 				case 'ten_sinh_vien':
 					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
 					break;
+				case 'ma_lop':
+					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
+					break;
 				default:
 					$where .= (!empty($where))? " AND "."".$field." =".$value."" : "".$field." =".$value."";
 					break;
@@ -73,6 +76,7 @@ if (!empty($where)) {
 			<fieldset>
 				<legend>Tra cứu</legend>
 				Tên sinh viên: <input type="text" name="ten_sinh_vien" value="<?=!empty($ten_sinh_vien)?$ten_sinh_vien:""?>">
+				Mã Lớp: <input type="text" name="ma_lop" value="<?=!empty($ma_lop)?$ma_lop:""?>">
 				<input type="submit" class="btn_search" value="Tìm">
 			</fieldset>			
 		</form>

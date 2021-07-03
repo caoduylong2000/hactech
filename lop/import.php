@@ -21,23 +21,24 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
 
-		foreach($data as $row)
-		{
-			$query = 
-			"INSERT INTO lop  VALUES (:ma_lop, :ten_lop, :ma_nganh, :gvcn, :khoa_hoc)";
-			$statement = $pdo->prepare($query);
-			$insert_data = array(
-				':ma_lop'		    =>	$row[0],
-				':ten_lop'			=>	$row[1],
-				':ma_nganh'			=>	$row[2],
-				':gvcn'				=>	$row[3],
-				':khoa_hoc'			=>	$row[4]
-
-			);
-
-			$statement->execute($insert_data);
+		for ($row = 2; $row <= $highestRow; ++$row) {
+        $malop = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+        $tenlop = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+        $nganh = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+        $gvcn = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+        $khoahoc = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+		 
+		$sql = $lop->insert($malop, $tenlop, $nganh, $gvcn, $khoahoc);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

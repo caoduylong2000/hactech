@@ -21,20 +21,19 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
-
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_phong'		    =>	$row[0],
-				':mo_ta'			=>	$row[1]
-			);
-
-			$query = 
-			"INSERT INTO phong_hoc VALUES (:ma_phong, :mo_ta)";
-
-			$statement = $pdo->prepare($query);
-			$statement->execute($insert_data);
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
+		for ($row = 2; $row <= $highestRow; ++$row) {
+	        $maphong = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+	        $mota = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
+	       
+		    $sql = $phonghoc->insert($maphong, $mota);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

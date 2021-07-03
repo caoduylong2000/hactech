@@ -21,23 +21,23 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
 
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_sinh_vien'	    =>	$row[0],
-				':hoc_ki'			=>	$row[1],
-				':so_tien'			=>	$row[2],
-				':ngay_dong'		=>	$row[3]
-
-			);
-
-			$query = 
-			"INSERT INTO hoc_phi VALUES (:ma_sinh_vien, :hoc_ki, :so_tien, :ngay_dong)";
-
-			$statement = $pdo->prepare($query);
-			$statement->execute($insert_data);
+		for ($row = 2; $row <= $highestRow; ++$row) {
+        $masv = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+        $hocki = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
+        $sotien = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
+        $ngaydong = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); 
+		 
+		$sql = $hocphi->insert($masv, $hocki, $sotien, $ngaydong);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

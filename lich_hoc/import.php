@@ -21,26 +21,26 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
 
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_mon'		    =>	$row[0],
-				':ma_lop'			=>	$row[1],
-				':phong_hoc'		=>	$row[2],
-				':gvpt'				=>	$row[3],
-				':bat_dau'			=>	$row[4],
-				':ket_thuc'			=>	$row[5],
-				':ngay'				=>	$row[6]
-
-			);
-
-			$query = 
-			"INSERT INTO lich_hoc VALUES (:ma_mon, :ma_lop, :phong_hoc, :gvpt, :bat_dau, :ket_thuc, :ngay)";
-
-			$statement = $pdo->prepare($query);
-			$statement->execute($insert_data);
+		for ($row = 2; $row <= $highestRow; ++$row) {
+        $mamon = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+        $malop = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
+        $phonghoc = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
+        $gvpt = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); 
+        $batdau = $worksheet->getCellByColumnAndRow(5, $row)->getValue(); 
+        $ketthuc = $worksheet->getCellByColumnAndRow(6, $row)->getValue(); 
+        $ngay = $worksheet->getCellByColumnAndRow(7, $row)->getValue(); 
+		 
+		$sql = $time->insert($mamon, $malop, $phonghoc, $gvpt, $batdau, $ketthuc, $ngay);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

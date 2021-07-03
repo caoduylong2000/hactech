@@ -21,22 +21,22 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
 
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_khoa'		    =>	$row[0],
-				':ten_khoa'			=>	$row[1],
-				':chu_nhiem_khoa'	=>	$row[2]
-
-			);
-
-			$query = 
-			"INSERT INTO khoa VALUES (:ma_khoa, :ten_khoa, :chu_nhiem_khoa";
-
-			$statement = $pdo->prepare($query);
-			$statement->execute($insert_data);
+		for ($row = 2; $row <= $highestRow; ++$row) {
+        $makhoa = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+        $tenkhoa = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
+        $chunhiemkhoa = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
+		 
+		$sql = $khoa->insert($makhoa, $tenkhoa, $chunhiemkhoa);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

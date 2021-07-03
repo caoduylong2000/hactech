@@ -14,7 +14,7 @@ if (!empty($_SESSION['filter'])) {
 	foreach ($_SESSION['filter'] as $field => $value) {
 		if (!empty($value)) {
 			switch ($field) {
-				case 'ten_mon':
+				case 'ma_nganh':
 					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
 					break;
 				case 'hoc_ki':
@@ -78,7 +78,7 @@ if (!empty($where)) {
 		<form action="view_form.php?action=search" method="POST">
 			<fieldset>
 				<legend>Tra cứu</legend>
-				Tên môn: <input type="text" name="ten_mon" value="<?=!empty($ten_mon)?$ten_mon:""?>">
+				Tên môn: <input type="text" name="ma_nganh" value="<?=!empty($ma_nganh)?$ma_nganh:""?>">
 				Học kì: <input type="text" name="hoc_ki" value="<?=!empty($hoc_ki)?$hoc_ki:""?>">
 				<input type="submit" class="btn_search" value="Tìm">
 			</fieldset>			

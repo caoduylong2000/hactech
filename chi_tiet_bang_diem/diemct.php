@@ -10,13 +10,12 @@
 			$this->db = $conn;
 		}
 
-		public function insert($stt, $masv, $tensv, $diem) {
+		public function insert($masv, $tensv, $diem) {
 			try {
-				$sql = "INSERT INTO chi_tiet_bang_diem (stt, ma_sinh_vien, ten_sinh_vien, diem) VALUES (:stt, :masv, :tensv, :diem)";
+				$sql = "INSERT INTO chi_tiet_bang_diem (ma_sinh_vien, ten_sinh_vien, diem) VALUES ( :masv, :tensv, :diem)";
 
 				$stmt = $this->db->prepare($sql);
 
-				$stmt->bindparam(':stt', $stt);
 				$stmt->bindparam(':masv', $masv);
 				$stmt->bindparam(':tensv', $tensv);
 				$stmt->bindparam(':diem', $diem);

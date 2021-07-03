@@ -1,5 +1,27 @@
+<?php $title = 'Export'; ?>
+<?php require_once '../module/dautrang.php'; ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form method="post">
+              <div class="row100">
+                <div class="col">Chọn địng dạng file</div>
+                <div class="col">
+                  <select name="file_type" class="form-control input-sm">
+                    <option value="Xlsx">Xlsx</option>
+                    <option value="Xls">Xls</option>
+                    <option value="Csv">Csv</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    	</div>
+<?php require_once '../module/footer.php'; ?>
 <?php
-$title = 'Export';
 
 //php_spreadsheet_export.php
 
@@ -8,7 +30,7 @@ include '../module/connect.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-$query = "SELECT * FROM thong_tin_sinh_vien ORDER BY ma_sinh_vien DESC";
+$query = "SELECT * FROM thong_tin_sinh_vien ";
 
 $statement = $pdo->prepare($query);
 
@@ -24,10 +46,10 @@ if(isset($_POST["export"]))
 
   $active_sheet->setCellValue('A1', 'Mã sinh viên');
   $active_sheet->setCellValue('B1', 'Tên sinh viên');
-  $active_sheet->setCellValue('C1', 'Mã lớp');
+  $active_sheet->setCellValue('C1', 'Lớp');
   $active_sheet->setCellValue('D1', 'Địa chỉ');
   $active_sheet->setCellValue('E1', 'Số điện thoại');
-  $active_sheet->setCellValue('F1', 'Email');
+  $active_sheet->setCellValue('F1', 'email');
 
   $count = 2;
 
@@ -40,7 +62,7 @@ if(isset($_POST["export"]))
     $active_sheet->setCellValue('E' . $count, $row["so_dien_thoai"]);
     $active_sheet->setCellValue('F' . $count, $row["email"]);
 
-    $count++;
+    $count = $count + 1;
   }
 
   $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($file, $_POST["file_type"]);
@@ -62,27 +84,4 @@ if(isset($_POST["export"]))
   exit;
 
 }
-
 ?>
-<?php require_once '../module/dautrang.php'; ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <form method="post">
-              <div class="row">
-                <div class="col-md-6">User Data</div>
-                <div class="col-md-4">
-                  <select name="file_type" class="form-control input-sm">
-                    <option value="Xlsx">Xlsx</option>
-                    <option value="Xls">Xls</option>
-                    <option value="Csv">Csv</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-    	</div>
-<?php require_once '../module/footer.php'; ?>

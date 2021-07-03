@@ -21,25 +21,25 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
+		}
 
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_mon'		    =>	$row[0],
-				':ten_mon'			=>	$row[1],
-				':ma_nganh'			=>	$row[2],
-				':hoc_ki'			=>	$row[3]
-
-			);
-			$query = 
-			"INSERT INTO mon_hoc(ma_mon, ten_mon, ma_nganh, hoc_ki) VALUES (:ma_mon, :ten_mon, :ma_nganh, :hoc_ki)";
-
-			$statement = $pdo->prepare($query);
-			$statement->execute($insert_data);
+		for ($row = 2; $row <= $highestRow; ++$row) {
+        $mamon = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); //Name
+        $tenmon = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); //Language
+        $nganh = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); //Mathematics
+        $hocki = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); //Foreign Language
+		 
+		$sql = $monhoc->insert($mamon, $tenmon, $nganh, $hocki);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
-
 	}
 	else
 	{

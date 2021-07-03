@@ -21,46 +21,35 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$data = $spreadsheet->getActiveSheet()->toArray();
-
-		foreach($data as $row)
-		{
-			$insert_data = array(
-				':ma_sinh_vien'		    =>	$row[0],
-				':ten_sinh_vien'		=>	$row[1],
-				':ma_lop'				=>	$row[2],
-				':dia_chi'				=>	$row[3],
-				':so_dien_thoai'		=>	$row[4],
-				':email'				=>	$row[5]
-			);
-
-			$query = 
-			"INSERT INTO thong_tin_sinh_vien VALUES (:ma_sinh_vien, :ten_sinh_vien, :ma_lop, :dia_chi, :so_dien_thoai, :email)"
-			;
-			$ma_sinh_vien = $username = $password;
-			$password = md5($ma_sinh_vien);
-			$query2 = 
-			"INSERT INTO tai_khoan VALUES (:username, :password, :ma_sinh_vien)"
-			;
-
-			$statement = $pdo->prepare($query);
-			$statement2 = $pdo->prepare($query2);
-			$statement->execute($insert_data);
-			$statement2=execute($query2);
+		$worksheet = $spreadsheet->getActiveSheet();
+		$highestRow = $worksheet->getHighestRow(); // total number of rows
+		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		$lines = $highestRow - 1; 
+		if ($lines <= 0) {
+		         Exit ('There is no data in the Excel table');
 		}
-		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
-
+		for ($row = 2; $row <= $highestRow; ++$row) {
+	        $masv = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
+	        $ten = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
+	        $lop = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
+	        $diachi = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); 
+	        $sdt = $worksheet->getCellByColumnAndRow(5, $row)->getValue(); 
+	        $email = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+		 
+		    $sql = $ttsv->insert($masv, $ten, $lop, $diachi, $sdt, $email);
+		}
+		$message = '<script>alert("Data Imported Successfully")</script>';
 	}
 	else
 	{
-		$message = '<div class="alert alert-danger">Only .xls .csv or .xlsx file allowed</div>';
+		$message = '<script>alert("Only .xls .csv or .xlsx file allowed")</script>';
 	}
 }
 else
 {
-	$message = '<div class="alert alert-danger">Please Select File</div>';
+	$message = '<script>alert("Please Select File")</script>';
 }
 
 echo $message;
-header("Location: view_form.php");
 ?>
