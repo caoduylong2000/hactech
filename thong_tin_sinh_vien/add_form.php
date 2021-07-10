@@ -1,10 +1,10 @@
 <?php $page = 'view_ttsv';
-$title = 'Cập nhật sinh viên';
+$title = 'Thêm sinh viên mới';
 require_once '../module/connect.php'; 
 require_once '../module/dautrang.php'; 
 
 
-if(isset($_POST['add'])) {
+	if(isset($_POST['add'])) {
 	  	$masv = $_POST['masv'];
 	  	$ten = $_POST['ten'];
 	  	$lop = $_POST['lop']; 
@@ -28,7 +28,7 @@ if(isset($_POST['add'])) {
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">
-					<input type="text" name="masv" required="required" pattern="CD[0-9]{6}" title="Yêu cầu nhập đúng định dạng">
+					<input type="text" name="masv" required="required">
 					<span class="text">Mã sinh viên</span>
 					<span class="line"></span>
 				</div>
@@ -46,7 +46,7 @@ if(isset($_POST['add'])) {
 				<div class="inputBox">
 					<select name="lop">
 						<?php while ($l = $lop1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?></option>
+							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?> - <?php echo $l['ma_lop'] ?></option>
 						<?php } ?>
 					</select>
 					<span class="text-select">Tên lớp</span>

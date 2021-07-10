@@ -1,3 +1,26 @@
+
+<?php require_once '../module/dautrang.php'; ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form method="post">
+               <div class="row100">
+                <div class="col">Chọn địng dạng file</div>
+                <div class="col">
+                  <select name="file_type" class="form-control input-sm">
+                    <option value="Xlsx">Xlsx</option>
+                    <option value="Xls">Xls</option>
+                    <option value="Csv">Csv</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    	</div>
+<?php require_once '../module/footer.php'; ?>
 <?php
 $title = 'Export';
 
@@ -8,10 +31,14 @@ include '../module/connect.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-$query = "SELECT * FROM chi_tiet_bang_diem ORDER BY ct_diem_id DESC";
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];  
+}
+
+$query = "SELECT * FROM chi_tiet_bang_diem WHERE ct_diem_id = :id";
 
 $statement = $pdo->prepare($query);
-
+$statement->bindparam(":id", $id);
 $statement->execute();
 
 $result = $statement->fetchAll();
@@ -22,7 +49,7 @@ if(isset($_POST["export"]))
 
   $active_sheet = $file->getActiveSheet();
 
-  $active_sheet->setCellValue('A1', 'STT');
+  $active_sheet->setCellValue('A1', 'id');
   $active_sheet->setCellValue('B1', 'Mã sinh viên');
   $active_sheet->setCellValue('C1', 'Tên sinh viên');
   $active_sheet->setCellValue('D1', 'Điểm');
@@ -32,7 +59,7 @@ if(isset($_POST["export"]))
 
   foreach($result as $row)
   {
-    $active_sheet->setCellValue('A' . $count, $row["stt"]);
+    $active_sheet->setCellValue('A' . $count, $row["id"]);
     $active_sheet->setCellValue('B' . $count, $row["ma_sinh_vien"]);
     $active_sheet->setCellValue('C' . $count, $row["ten_sinh_vien"]);
     $active_sheet->setCellValue('D' . $count, $row["diem"]);
@@ -62,25 +89,3 @@ if(isset($_POST["export"]))
 }
 
 ?>
-<?php require_once '../module/dautrang.php'; ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <form method="post">
-              <div class="row">
-                <div class="col-md-6">User Data</div>
-                <div class="col-md-4">
-                  <select name="file_type" class="form-control input-sm">
-                    <option value="Xlsx">Xlsx</option>
-                    <option value="Xls">Xls</option>
-                    <option value="Csv">Csv</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-    	</div>
-<?php require_once '../module/footer.php'; ?>

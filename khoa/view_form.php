@@ -21,7 +21,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 $data_per_page = 20;

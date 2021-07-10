@@ -1,5 +1,5 @@
 <?php
-$title = 'Danh sách Lớp';
+$title = 'Danh sách sinh viên';
 require_once '../module/connect.php'; 
 require_once '../module/dautrang.php'; 
 
@@ -26,29 +26,29 @@ if (!isset($_GET['id'])) {
 				<p><b>Số sinh viên:</b> <?php echo $sosv[0]; ?></p>
 				<p><b>Khóa học:</b> K<?php echo $result['khoa_hoc']; ?></p>
 			</div>
-		</div>
-		<div>
-			<a href="add_form.php" class="btn">
+			<div class="col">
+				<a href="../thong_tin_sinh_vien/add_form.php" class="btn">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 				ADD
 			</a>
-			<a href="" class="btn">
+			<a href="import_data.php" class="btn">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 				IMPORT
 			</a>
-			<a href="" class="btn">
+			<a href="export_data.php?id=<?php echo $result['ma_lop']; ?>" class="btn">
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
 				EXPORT
 			</a>
+			</div>
 		</div>
 		<div class="row100">
 			<div class="col">

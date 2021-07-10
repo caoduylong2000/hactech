@@ -27,7 +27,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 
@@ -60,7 +60,7 @@ if (!empty($where)) {
 			<span></span>
 			ADD
 		</a>
-		<a href="" class="btn">
+		<a href="import_data.php" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -97,10 +97,10 @@ if (!empty($where)) {
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 				<tr>
 					<td> <?php echo $r['bang_diem_id']; ?> </td>
-					<td> <?php echo $r['ten_lop']; ?> (<?php echo $r['ma_lop']; ?>)</td>
-					<td> <?php echo $r['ten_mon']; ?> </td>
+					<td> <?php echo $r['ma_lop']; ?></td>
+					<td> <?php echo $r['ma_mon']; ?> </td>
 					<td> <?php echo $r['gvpt']; ?> </td>
-					<td> <?php echo $r['ma_hoc_ki']; ?> </td>
+					<td> <?php echo $r['hoc_ki_id']; ?> </td>
 					<td>
 						<a class="btn_info" href="../chi_tiet_bang_diem/view_form.php?id=<?php echo $r['bang_diem_id']; ?> ">Details</a>
 						<a class="btn_up" href="update_form.php?id=<?php echo $r['bang_diem_id']; ?> ">Update</a>

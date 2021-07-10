@@ -1,39 +1,18 @@
-<?php $title = 'Export'; ?>
-<?php require_once '../module/dautrang.php'; ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <form method="post">
-              <div class="row100">
-                <div class="col">Chọn địng dạng file</div>
-                <div class="col">
-                  <select name="file_type" class="form-control input-sm">
-                    <option value="Xlsx">Xlsx</option>
-                    <option value="Xls">Xls</option>
-                    <option value="Csv">Csv</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-<?php require_once '../module/footer.php'; ?>
 <?php
 
 //php_spreadsheet_export.php
 
 include '../module/vendor/autoload.php';
-include '../module/connect.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 
-$query = "SELECT * FROM phong_hoc ";
+$connect = new PDO("mysql:host=localhost;dbname=hactech", "root", "");
 
-$statement = $pdo->prepare($query);
+
+$query = "SELECT * FROM phong_hoc";
+
+$statement = $connect->prepare($query);
 
 $statement->execute();
 
@@ -45,9 +24,8 @@ if(isset($_POST["export"]))
 
   $active_sheet = $file->getActiveSheet();
 
-  $active_sheet->setCellValue('A1', 'Mã phòng');
+  $active_sheet->setCellValue('A1', 'Mã Phòng');
   $active_sheet->setCellValue('B1', 'Mô tả');
-  
 
   $count = 2;
 
@@ -55,7 +33,6 @@ if(isset($_POST["export"]))
   {
     $active_sheet->setCellValue('A' . $count, $row["ma_phong"]);
     $active_sheet->setCellValue('B' . $count, $row["mo_ta"]);
-   
 
     $count = $count + 1;
   }
@@ -79,4 +56,30 @@ if(isset($_POST["export"]))
   exit;
 
 }
+
 ?>
+<?php require_once '../module/dautrang.php'; ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form method="post">
+              <div class="row100">
+                <div class="col">Chọn định dạng file</div>
+                <div class="col">
+                  <select name="file_type" class="form-control input-sm">
+                    <option value="Xlsx">Xlsx</option>
+                    <option value="Xls">Xls</option>
+                    <option value="Csv">Csv</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="panel-body">
+          <div class="table-responsive">
+          </div>
+          </div>
+        </div>
+    <?php require_once '../module/footer.php'; ?>

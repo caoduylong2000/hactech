@@ -12,7 +12,7 @@
 
 		public function insert($mon, $lop, $gv, $hocki) {
 			try {
-				$sql = "INSERT INTO bang_diem VALUES (:mon, :lop, :gv, :hocki)";
+				$sql = "INSERT INTO bang_diem(ma_mon, ma_lop, gvpt, hoc_ki_id) VALUES (:mon, :lop, :gv, :hocki)";
 
 				$stmt = $this->db->prepare($sql);
 
@@ -34,7 +34,7 @@
 				$sql = "SELECT * FROM bang_diem d 
 				INNER JOIN mon_hoc m ON d.ma_mon = m.ma_mon 
 				INNER JOIN lop l ON d.ma_lop = l.ma_lop
-				INNER JOIN hoc_ki h ON d.hoc_ki_id = h.hoc_ki_id";
+				INNER JOIN hoc_ki h ON d.hoc_ki_id = h.hoc_ki";
 				$result = $this->db->query($sql);
 				return $result;
 			} catch (Exception $e) {
@@ -48,7 +48,7 @@
 				$sql = "SELECT * FROM bang_diem d 
 				INNER JOIN mon_hoc m ON d.ma_mon = m.ma_mon 
 				INNER JOIN lop l ON d.ma_lop = l.ma_lop
-				INNER JOIN hoc_ki h ON d.hoc_ki = h.hoc_ki_id WHERE bang_diem_id = :id";
+				INNER JOIN hoc_ki h ON d.hoc_ki_id = h.hoc_ki WHERE d.bang_diem_id = :id";
 
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindparam(":id", $id);

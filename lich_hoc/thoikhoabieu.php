@@ -10,17 +10,16 @@
 			$this->db = $conn;
 		}
 
-		public function insert($lop, $mon, $gv, $phong, $batdau, $ketthuc, $ngay) {
+		public function insert($mon, $lop, $phong, $gv, $batdau, $ketthuc, $ngay) {
 			try {
-				$sql = "INSERT INTO lich_hoc VALUES (:lop, :mon, :gv, :phong, :batdau, :ketthuc, :ngay)";
+				$sql = "INSERT INTO lich_hoc VALUES (:mon, :lop, :phong, :gv, :batdau, :ketthuc, :ngay)";
 
 				$stmt = $this->db->prepare($sql);
 
-				$stmt->bindparam(':id', $id);
-				$stmt->bindparam(':lop', $lop);
 				$stmt->bindparam(':mon', $mon);
-				$stmt->bindparam(':gv', $gv);
+				$stmt->bindparam(':lop', $lop);
 				$stmt->bindparam(':phong', $phong);
+				$stmt->bindparam(':gv', $gv);
 				$stmt->bindparam(':batdau', $batdau);
 				$stmt->bindparam(':ketthuc', $ketthuc);
 				$stmt->bindparam(':ngay', $ngay);
@@ -35,7 +34,7 @@
 
 		public function view() {
 			try {
-					$sql = "SELECT * FROM lich_hoc lh 
+				$sql = "SELECT * FROM lich_hoc lh 
 				INNER JOIN phong_hoc ph ON lh.phong_hoc = ph.ma_phong
 				INNER JOIN mon_hoc mh ON lh.ma_mon = mh.ma_mon 
 				INNER JOIN lop l ON lh.ma_lop = l.ma_lop";
@@ -49,7 +48,7 @@
 
 		public function details($id) {
 			try {
-				$sql = "SELECT * FROM lich_hoc WHERE lich_hoc_id = :id";
+				$sql = "SELECT * FROM lich_hoc WHERE lich_id = :id";
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindparam(":id", $id);
 				$stmt->execute();
@@ -96,7 +95,7 @@
 
 		public function update($id, $lop, $mon, $gv, $phong, $batdau, $ketthuc, $ngay) {
 			try {
-				$sql = "UPDATE lich_hoc SET ma_lop = :lop, ma_mon = :mon, gvpt =  :gv, phong_hoc = :phong, bat_dau = :batdau, ket_thuc = :ketthuc, thoi_gian = :ngay WHERE lich_hoc_id = :id";
+				$sql = "UPDATE lich_hoc SET ma_lop = :lop, ma_mon = :mon, gvpt =  :gv, phong_hoc = :phong, bat_dau = :batdau, ket_thuc = :ketthuc, thoi_gian = :ngay WHERE lich_id = :id";
 				$stmt = $this->db->prepare($sql);
 
 				$stmt->bindparam(':id', $id);
@@ -118,7 +117,7 @@
 
 		public function delete($id) {
 			try {
-				$sql = "DELETE FROM lich_hoc WHERE lich_hoc_id = :id";
+				$sql = "DELETE FROM lich_hoc WHERE lich_id = :id";
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindparam(":id", $id);
 				$stmt->execute();

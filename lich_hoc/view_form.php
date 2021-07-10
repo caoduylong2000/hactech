@@ -27,7 +27,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 
@@ -75,7 +75,6 @@ if (!empty($where)) {
 			EXPORT
 		</a>
 	</div>
-	</div>
 	<div class="search">
 		<form action="view_form.php?action=search" method="POST">
 			<fieldset>
@@ -98,8 +97,7 @@ if (!empty($where)) {
 				<td>Môn</td>
 				<td>Phòng học</td>
 				<td>Giáo viên</td>
-				<td>Giờ bắt đầu</td>
-				<td>Giờ gian kết thúc</td>
+				<td>Giờ học</td>
 				<td>Ngày</td>
 				<td>Action </td>
 			</tr>
@@ -107,17 +105,16 @@ if (!empty($where)) {
 		<tbody>
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 			<tr>
-				<td> <?php echo $r['lich_hoc_id']; ?> </td>
-				<td> <?php echo $r['ten_lop']; ?> - <?php echo $r['ma_lop']; ?></td>
-				<td> <?php echo $r['ten_mon']; ?> </td>
-				<td> <?php echo $r['ma_phong']; ?> </td>
+				<td> <?php echo $r['lich_id']; ?> </td>
+				<td> <?php echo $r['ma_lop']; ?></td>
+				<td> <?php echo $r['ma_mon']; ?> </td>
+				<td> <?php echo $r['phong_hoc']; ?> </td>
 				<td> <?php echo $r['gvpt']; ?> </td>
-				<td> <?php echo $r['bat_dau']; ?> </td>
-				<td> <?php echo $r['ket_thuc']; ?> </td>
-				<td> <?php echo $r['thoi_gian']; ?> </td>
+				<td> <?php echo $r['bat_dau']; ?> - <?php echo $r['ket_thuc']; ?> </td>
+				<td> <?php echo $r['ngay']; ?> </td>
 				<td>
-					<a class="btn_up" href="update_form.php?id=<?php echo $r['lich_hoc_id']; ?> ">Update</a>
-					<a class="btn_del" href="delete.php?id=<?php echo $r['lich_hoc_id']; ?> ">Delete</a>
+					<a class="btn_up" href="update_form.php?id=<?php echo $r['lich_id']; ?> ">Update</a>
+					<a class="btn_del" href="delete.php?id=<?php echo $r['lich_id']; ?> ">Delete</a>
 				</td>
 			</tr>
 		<?php } ?>

@@ -42,7 +42,7 @@
 
 		public function details($id) {
 			try {
-				$sql = "SELECT * FROM mon_hoc m INNER JOIN chuyen_nganh c ON m.ma_nganh = c.ma_nganh WHERE m.mon_id = :id";
+				$sql = "SELECT * FROM mon_hoc m INNER JOIN chuyen_nganh c ON m.ma_nganh = c.ma_nganh WHERE m.mon_hoc_id = :id";
 				$stmt = $this->db->prepare($sql);
 				$stmt->bindparam(":id", $id);
 				$stmt->execute();

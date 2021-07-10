@@ -1,4 +1,4 @@
-<?php $title = 'Thêm môn học';
+<?php $title = 'Thêm lớp mới';
 require_once '../module/dautrang.php'; 
 require_once '../module/connect.php'; 
 
@@ -11,7 +11,6 @@ require_once '../module/connect.php';
 	  	$khoahoc = $_POST['khoahoc']; 
 	  	
 	  	$isSuccess = $lop->insert($ma, $ten, $nganh, $gvcn, $sosv, $khoahoc);
-
 	  	if ($isSuccess) {
 	  		header("Location: view_form.php");
 	  	} else {

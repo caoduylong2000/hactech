@@ -21,7 +21,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 $data_per_page = 20;
@@ -66,6 +66,13 @@ if (!empty($where)) {
 			<span></span>
 			<span></span>
 			EXPORT
+		</a>
+		<a href="delete_all.php" class="btn">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			DELETE ALL
 		</a>
 	</div>
 	<div class="search">

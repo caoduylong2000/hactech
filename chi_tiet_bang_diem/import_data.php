@@ -10,6 +10,7 @@ require_once '../module/dautrang.php'; ?>
                     <td width="50%"><input type="file" name="import_excel" /></td>
                     <td width="25%"><input type="submit" name="import" id="import" class="btn btn-primary" value="Import" /></td>
                   </tr>
+                  <tr>* Quá trình nhập liệu có thể mất vài phút, yêu cầu không rời khỏi trang cho đến khi quá trình hoàn tất </tr>
                 </table>
               </form>
     	    		<br />
@@ -22,7 +23,7 @@ $(document).ready(function(){
   $('#import_excel_form').on('submit', function(event){
     event.preventDefault();
     $.ajax({
-      url:"import.php",
+      url:"import.php?id=<?php echo $id ?>",
       method:"POST",
       data:new FormData(this),
       contentType:false,

@@ -2,13 +2,13 @@
 require_once '../module/dautrang.php'; ?>
           <div class="panel-body">
         		<div class="table-responsive">
-        			<span id="message"></span>
               <form method="post" id="import_excel_form" enctype="multipart/form-data">
+                <a href="../document/template/DSsinhvien.xlsx" download="Mẫu import Thông tin sinh viên" class="btn btn-primary">Download Form</a>
                 <table class="table">
                   <tr>
                     <td width="25%" align="right">Select Excel File</td>
                     <td width="50%"><input type="file" name="import_excel" /></td>
-                    <td width="25%"><input type="submit" name="import" id="import" class="btn btn-primary" value="Import" /></td>
+                    <td width="25%"><input type="submit" name="import" id="import"  value="Import" /></td>
                   </tr>
                   <tr>* Quá trình nhập liệu có thể mất vài phút, yêu cầu không rời khỏi trang cho đến khi quá trình hoàn tất </tr>
                 </table>

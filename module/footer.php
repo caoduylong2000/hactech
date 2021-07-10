@@ -3,6 +3,9 @@
 	<!-- End page main -->
 	</div>
 </div>
+<script type="text/javascript">
+  $('select').select2();
+</script>
 <script>
 		function toggleMenu() {
 			let toggle = document.querySelector('.toggle');

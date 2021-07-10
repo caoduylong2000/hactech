@@ -1,24 +1,23 @@
 <?php $title = 'Thêm điểm';
 require_once '../module/dautrang.php'; 
 require_once '../module/connect.php'; 
-
-	 if (isset($_GET['id'])) {
+	
+	if (isset($_GET['id'])) {
 	 	$id = $_GET['id'];
 	 	if(isset($_POST['add'])) {
-	  	$stt = $_POST['stt'];
-	  	$name = $_POST['masv'];
-	  	$name = $_POST['tensv'];
-	  	$diem = $_POST['diem']; 
+		  	$name = $_POST['masv'];
+		  	$name = $_POST['tensv'];
+		  	$diem = $_POST['diem']; 
 
-	  	$isSuccess = $diemct->insert($stt, $masv, $name, $diem);
+		  	$isSuccess = $diemct->insert($id, $masv, $name, $diem);
 
-	  	if ($isSuccess) {
-	  		header("Location: view_form.php?id=$id");
-	  	} else {
-	  		echo "Chưa thể thêm giữ liệu. Kiểm tra lại";
-	  	}
+		  	if ($isSuccess) {
+		  		header("Location: view_form.php?id=$id");
+		  	} else {
+		  		echo "Chưa thể thêm giữ liệu. Kiểm tra lại";
+		  	}
+		}
 	}
-}
 ?>
 	<form action="add_form.php" method="POST">
 		<h2>Thêm dữ liệu</h2>

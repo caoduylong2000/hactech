@@ -130,6 +130,17 @@
 			}
 		}
 
+		public function delete_all() {
+			try {
+				$sql = "DELETE FROM lop";
+				$stmt = $this->db->prepare($sql);
+				$stmt->execute();
+				return true;
+			} catch (Exception $e) {
+				echo $e->getMessage();
+				return false;
+			}
+		}
 
 	}
  ?>

@@ -3,8 +3,8 @@
 
 	if(isset($_POST['update'])) {
 	  	$masv = $_POST['masv'];
-	  	$ten = $_POST['ten'];
-	  	$lop = $_POST['lop']; 
+	  	$ten = $_POST['tensv'];
+	  	$lop = $_POST['malop']; 
 	  	$diachi = $_POST['diachi']; 
 	  	$sdt = $_POST['sdt'];
 	  	$email = $_POST['email'];

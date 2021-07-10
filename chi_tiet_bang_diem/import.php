@@ -3,7 +3,9 @@
 //import.php
 require_once '../module/connect.php';
 include '../module/vendor/autoload.php';
-
+if (isset($_GET['id'])) {
+  	$id = $_GET['id'];	
+} 
 if($_FILES["import_excel"]["name"] != '')
 {
 	$allowed_extension = array('xls', 'csv', 'xlsx');
@@ -36,7 +38,7 @@ if($_FILES["import_excel"]["name"] != '')
         $tensv = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
         $diem = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
 		 
-		$sql = $diemct->insert($masv, $tensv, $diem);
+		$sql = $diemct->insert($id, $masv, $tensv, $diem);
 		}
 		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
 

@@ -122,5 +122,21 @@
 				return false;
 			}
 		}
+
+		public function delete_all() {
+			try {
+				$sql = "DELETE FROM tai_khoan";
+				$sql2 = "DELETE FROM thong_tin_sinh_vien";
+				$stmt = $this->db->prepare($sql);
+				$stmt2 = $this->db->prepare($sql2);
+				$stmt->execute();
+				$stmt2->execute();
+				return true;
+			} catch (Exception $e) {
+				echo $e->getMessage();
+				return false;
+			}
+		}
+		
 	}
  ?>

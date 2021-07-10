@@ -15,7 +15,7 @@ require_once '../module/connect.php';
 ?>
 	<form action="add_form.php" method="POST">
 		<h2>Cập nhật dữ liệu</h2>
-		<input type="hidden" name="id" value="<?php echo $result['lich_hoc_id']; ?>">
+		<input type="hidden" name="id" value="<?php echo $result['lich_id']; ?>">
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">
@@ -31,7 +31,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="mamon">
 						<?php while($m = $mon1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $m['ma_mon']; ?>" <?php if ($m['ma_mon'] == $result['ma_mon']) echo 'selected' ?>><?php echo $m['ten_mon']; ?></option>
+							<option value="<?php echo $m['ma_mon']; ?>" <?php if ($m['ma_mon'] == $result['ma_mon']) echo 'selected' ?>><?php echo $m['ma_mon']; ?></option>
 						<?php } ?>				
 					</select>
 					<span class="text-select">Tên môn</span>
@@ -60,21 +60,21 @@ require_once '../module/connect.php';
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">
-					<input type="date" name="ngay" value="<?php echo $result['thoi_gian']; ?>">
+					<input type="date" name="ngay" value="<?php echo $result['ngay']; ?>">
 					<span class="text-select">Ngày học</span>
 					<span class="line"></span>
 				</div>
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					 <input type="time" name="batdau" value="<?php echo $result['bat_dau']; ?>">
+					 <input type="time" min="06:00" max="18:00" name="batdau" value="<?php echo $result['bat_dau']; ?>">
 					<span class="text-select">Giờ bắt đầu</span>
 					<span class="line"></span>
 				</div>
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<input type="time" name="ketthuc" value="<?php echo $result['ket_thuc']; ?>">
+					<input type="time" min="06:00" max="18:00" name="ketthuc" value="<?php echo $result['ket_thuc']; ?>">
 					<span class="text-select">Giờ kết thúc</span>
 					<span class="line"></span>
 				</div>

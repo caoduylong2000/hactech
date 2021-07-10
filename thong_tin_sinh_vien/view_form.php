@@ -12,6 +12,9 @@ if (!empty($_SESSION['filter'])) {
 	foreach ($_SESSION['filter'] as $field => $value) {
 		if (!empty($value)) {
 			switch ($field) {
+				case 'ma_sinh_vien':
+					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
+					break;
 				case 'ten_sinh_vien':
 					$where .= (!empty($where))? " AND "."".$field." LIKE '%".$value."%'" : "".$field." LIKE '%".$value."%'";
 					break;
@@ -24,7 +27,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 
@@ -70,11 +73,19 @@ if (!empty($where)) {
 			<span></span>
 			EXPORT
 		</a>
+		<a href="delete_all.php" class="btn">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			DELETE ALL
+		</a>
 	</div>
 	<div class="search">
 		<form action="view_form.php?action=search" method="POST">
 			<fieldset>
 				<legend>Tra cứu</legend>
+				Mã sinh viên: <input type="text" name="ma_sinh_vien" value="<?=!empty($ma_sinh_vien)?$ma_sinh_vien:""?>">
 				Tên sinh viên: <input type="text" name="ten_sinh_vien" value="<?=!empty($ten_sinh_vien)?$ten_sinh_vien:""?>">
 				Mã Lớp: <input type="text" name="ma_lop" value="<?=!empty($ma_lop)?$ma_lop:""?>">
 				<input type="submit" class="btn_search" value="Tìm">

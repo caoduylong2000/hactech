@@ -8,25 +8,26 @@ require_once '../module/dautrang.php';
 	  	echo "false";
 	  } else {
 	  	$id = $_GET['id'];	
-	  	$view = $diemct->view($id);
-	  } ?>
+	  	$result = $diemct->view($id);
+	  } 
+?>
 
 	<div>
-		<a href="add_form.php?id=<?php echo $id ?>" class="btn">
+	<!-- 	<a href="add_form.php?id=<?php echo $id ?>" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			ADD
-		</a>
-		<a href="" class="btn">
+		</a> -->
+		<a href="import_data.php?id=<?php echo $id ?>" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
 			<span></span>
 			IMPORT
 		</a>
-		<a href="" class="btn">
+		<a href="export_data.php?id=<?php echo $id ?>" class="btn">
 			<span></span>
 			<span></span>
 			<span></span>
@@ -36,9 +37,9 @@ require_once '../module/dautrang.php';
 	</div>
 	<table>
 		<thead>
-			<tr>ID :<?php echo $id ?></tr>
+			<tr>ID bảng điểm :<?php echo $id ?></tr>
 			<tr>
-				<td>STT</td>
+				<td>ID</td>
 				<td>Tên sinh viên </td>
 				<td>Điểm </td>
 				<td>Action</td>
@@ -47,12 +48,12 @@ require_once '../module/dautrang.php';
 		<tbody>
 			<?php while ($r = $result->fetch(PDO::FETCH_ASSOC)) { ?>
 				<tr>
-					<td> <?php echo $v['stt'] ?> </td>
+					<td> <?php echo $v['id'] ?> </td>
 					<td> <?php echo $v['ten_sinh_vien'] ?> </td>
 					<td> <?php echo $v['diem'] ?> </td>
 					<td>
-						<a class="btn_up" href="update_form.php?stt=<?php echo $v['stt']; ?>">Update</a>
-						<a class="btn_del" href="delete.php?stt=<?php echo $v['stt']; ?>">Delete</a>
+						<a class="btn_up" href="update_form.php?id=<?php echo $v['id']; ?>">Update</a>
+						<a class="btn_del" href="delete.php?id=<?php echo $v['id']; ?>">Delete</a>
 					</td>
 				</tr>
 		<?php } ?>

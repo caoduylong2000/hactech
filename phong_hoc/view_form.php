@@ -20,7 +20,7 @@ if (!empty($_SESSION['filter'])) {
 			}
 		}
 	}
-	extract($_SESSION['filter']);
+	unset($_SESSION['filter']);
 }
 
 
@@ -31,7 +31,7 @@ $record = $pdo->query("SELECT count(*) FROM phong_hoc");
 
 
 if (!empty($where)) {
-	$record = $pdo->query("SELECT count(*) FROM phong_hoc where ".$where.""); 
+	$record = $pdo->query("SELECT count(*) FROM phong_hoc WHERE ".$where.""); 
 } else {
 	$record = $pdo->query("SELECT count(*) FROM phong_hoc"); 
 }

@@ -2,19 +2,18 @@
 require_once '../module/dautrang.php'; 
 require_once '../module/connect.php'; 
 
-	if(isset($_POST['ok'])) {
-	  	$id = $_POST['id'];
+	if(isset($_POST['add'])) {
 	  	$mon = $_POST['tenmon'];
 	  	$lop = $_POST['tenlop']; 
 	  	$gv = $_POST['gvpt']; 
 	  	$hocki = $_POST['hocki'];
 
-	  	$isSuccess = $diem->insert($id, $mon, $lop, $gv, $hocki);
+	  	$isSuccess = $diem->insert($mon, $lop, $gv, $hocki);
 
 	  	if ($isSuccess) {
 	  		header("Location: view_form.php");
 	  	} else {
-	  		echo "Chưa thể thêm giữ liệu. Kiểm tra lại";
+	  		echo "<script>alert('Chưa thể thêm giữ liệu. Kiểm tra lại')</script>";
 	  	}
 	  }
 
@@ -29,7 +28,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="tenmon">
 						<?php while ($m = $mon1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $m['ma_mon'] ?> "><?php echo $m['ten_mon']; ?></option>
+							<option value="<?php echo $m['ma_mon'] ?> "><?php echo $m['ten_mon']; ?>(<?php echo $m['ma_mon'] ?>)</option>
 						<?php } ?>
 					</select>
 					<span class="text-select">Tên môn</span>
@@ -40,7 +39,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="tenlop">
 						<?php while ($l = $lop1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?></option>
+							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?>(<?php echo $l['ma_lop'] ?>)</option>
 						<?php } ?>
 					</select>
 					<span class="text-select">Tên lớp</span>
@@ -53,7 +52,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="hocki">
 						<?php while ($hk = $hocki1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $hk['hoc_ki_id'] ?> "><?php echo $hk['hoc_ki_id']; ?></option>
+							<option value="<?php echo $hk['hoc_ki'] ?> "><?php echo $hk['hoc_ki']; ?></option>
 						<?php } ?>
 					</select>
 					<span class="text-select">Học kì</span>

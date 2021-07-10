@@ -4,20 +4,24 @@
 	include_once 'session.php';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$user = $_POST['username'];
-		$pass = $_POST['password'];
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$md5 = md5($_POST['password']);
+		if ($user == '' && $pass == '') {
+			echo "<script>alert('Yêu cầu nhập thông tin đăng nhập.')</script>";
+		}
 		if ($user == 'admin' && $pass == 'password') {
+			$_SESSION['admin'] = $user;
 			header("location: ../module/admin.php");
 		} else {
-			$newpass = md5($pass);
-			$log = $user->getUser($user, $newpass);
-
-			if (!$log) {
-				echo "<script>alert ('Sai thông tin đăng nhập');</script>";
+			$log = $user->getUser($username, $md5);
+			
+			if ($log) {
+				$_SESSION['user'] = $user;
+				$_SESSION['log_id'] = $log;
+				header("location: ../index.php");
 			} else {
-				/*$_SESSION['user'] = $user;
-				$_SESSION['log_id'] = $log['account_id'];*/
-				header("location: index.php");
+				echo "<script>alert('Sai thông tin đăng nhập.')</script>";
 			}
 		}
 	}

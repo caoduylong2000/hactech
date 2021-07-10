@@ -12,10 +12,11 @@
 
 		public function insert($masv, $tensv, $diem) {
 			try {
-				$sql = "INSERT INTO chi_tiet_bang_diem (ma_sinh_vien, ten_sinh_vien, diem) VALUES ( :masv, :tensv, :diem)";
+				$sql = "INSERT INTO chi_tiet_bang_diem (ct_diem_id, ma_sinh_vien, ten_sinh_vien, diem) VALUES (:ct_diem_id, :masv, :tensv, :diem)";
 
 				$stmt = $this->db->prepare($sql);
 
+				$stmt->bindparam(':ct_diem_id', $ct_diem_id);
 				$stmt->bindparam(':masv', $masv);
 				$stmt->bindparam(':tensv', $tensv);
 				$stmt->bindparam(':diem', $diem);
@@ -47,11 +48,11 @@
 			}
 		}
 
-		public function details($stt) {
+		public function details($id) {
 			try {
-				$sql = "SELECT * FROM chi_tiet_bang_diem WHERE stt = :stt";
+				$sql = "SELECT * FROM chi_tiet_bang_diem WHERE id = :id";
 				$stmt = $this->db->prepare($sql);
-				$stmt->bindparam('stt', $stt);
+				$stmt->bindparam('id', $id);
 				$stmt->execute();
 
 				return $stmt = $stmt->fetch();
@@ -61,13 +62,13 @@
 			}
 		}
 
-		public function update($stt, $masv, $tensv, $diem) {
+		public function update($id, $masv, $tensv, $diem) {
 			try {
-				$sql = "UPDATE chi_tiet_bang_diem SET ma_sinh_vien = :masv, ten_sinh_vien = :tensv, diem = :diem WHERE stt = :stt";
+				$sql = "UPDATE chi_tiet_bang_diem SET ma_sinh_vien = :masv, ten_sinh_vien = :tensv, diem = :diem WHERE id = :id";
 
 				$stmt = $this->db->prepare($sql);
 
-				$stmt->bindparam('stt', $stt);
+				$stmt->bindparam('id', $id);
 				$stmt->bindparam('masv', $masv);
 				$stmt->bindparam('tensv', $tensv);
 				$stmt->bindparam('diem', $diem);
@@ -80,11 +81,11 @@
 			}
 		}
 
-		public function delete($stt) {
+		public function delete($id) {
 			try {
-				$sql = "DELETE FROM chi_tiet_bang_diem WHERE stt = :stt";
+				$sql = "DELETE FROM chi_tiet_bang_diem WHERE id = :id";
 				$stmt = $this->db->prepare($sql);
-				$stmt->bindparam('stt', $stt);
+				$stmt->bindparam('id', $id);
 				$stmt->execute();
 				return true;
 			} catch (Exception $e) {

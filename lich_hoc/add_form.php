@@ -2,17 +2,23 @@
 require_once '../module/dautrang.php'; 
 require_once '../module/connect.php'; 
 
-	if(isset($_POST['ok'])) {
-	  	$lop = $_POST['lop'];
-	  	$mon = $_POST['mon'];
-	  	$phong = $_POST['phong'];
-	  	$gv = $_POST['gv'];
-	  	$start = $_POST['batdau'];
-	  	$end = $_POST['ketthuc']; 
-	  	$ngay = $_POST['ngay']; 
+	if(isset($_POST['add'])) {
+	  	$lop = $_POST['malop'];
+	  	$mon = $_POST['mamon'];
+	  	$phong = $_POST['maphong'];
+	  	$gv = $_POST['gvpt'];
 
-	  	$isSuccess = $time->insert($lop, $mon, $gv, $phong, $start, $end, $ngay);
+	  	$cv_start = strtotime($_POST['batdau']);
+	  	$start = date('H:i:s', $cv_start);
 
+	  	$cv_end = strtotime($_POST['ketthuc']);
+	  	$end = date('H:i:s', $cv_end);
+
+	  	$cv_ngay = strtotime($_POST['ngay']);
+	  	$ngay = date('Y-m-d', $cv_ngay);
+
+	  	$isSuccess = $time->insert($mon, $lop, $phong, $gv, $start, $end, $ngay);
+	  	
 	  	if ($isSuccess) {
 	  		header("Location: view_form.php");
 	  	} else {
@@ -32,7 +38,7 @@ require_once '../module/connect.php';
 				<div class="inputBox">
 					<select name="malop">
 						<?php while ($l = $lop1->fetch(PDO::FETCH_ASSOC)) { ?>
-							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?></option>
+							<option value="<?php echo $l['ma_lop'] ?> "><?php echo $l['ten_lop']; ?>(<?php echo $l['ma_lop'] ?>)</option>
 						<?php } ?>		
 					</select>
 					<span class="text-select">Tên lớp</span>
@@ -52,14 +58,14 @@ require_once '../module/connect.php';
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">
-					<input type="text" name="gvcn" required="required">
+					<input type="text" name="gvpt" required="required">
 					<span class="text">Giáo viên chủ nhiệm</span>
 					<span class="line"></span>
 				</div>
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<select name="maphong" id="">
+					<select name="maphong">
 						<?php while ($p = $phong1->fetch(PDO::FETCH_ASSOC)) { ?>
 							<option value="<?php echo $p['ma_phong'] ?> "><?php echo $p['ma_phong']; ?></option>
 						<?php } ?>			
@@ -78,14 +84,14 @@ require_once '../module/connect.php';
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<input type="time" name="batdau" required="required">
+					<input type="time" min="06:00:00" max="18:00:00" name="batdau" required="required">
 					<span class="text-select">Giờ bắt đầu</span>
 					<span class="line"></span>
 				</div>
 			</div>
 			<div class="col">
 				<div class="inputBox">
-					<input type="time" name="ketthuc" required="required">
+					<input type="time" min="06:00:00" max="18:00:0"0 name="ketthuc" required="required">
 					<span class="text-select">Giờ kết thúc</span>
 					<span class="line"></span>
 				</div>

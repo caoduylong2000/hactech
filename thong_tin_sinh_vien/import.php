@@ -1,8 +1,11 @@
 <?php
 
 //import.php
-require_once '../module/connect.php';
+
 include '../module/vendor/autoload.php';
+include '../module/connect.php';
+
+$connect = new PDO("mysql:host=localhost;dbname=hactech", "root", "");
 
 if($_FILES["import_excel"]["name"] != '')
 {
@@ -21,35 +24,42 @@ if($_FILES["import_excel"]["name"] != '')
 
 		unlink($file_name);
 
-		$worksheet = $spreadsheet->getActiveSheet();
-		$highestRow = $worksheet->getHighestRow(); // total number of rows
-		$highestColumn = $worksheet->getHighestColumn(); // total number of columns
-		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); 
+		
+
+		$data = $spreadsheet->getActiveSheet();
+		$highestRow = $data->getHighestRow(); // total number of rows
+		$highestColumn = $data->getHighestColumn(); // total number of columns
+		$highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
+		 
 		$lines = $highestRow - 1; 
 		if ($lines <= 0) {
 		         Exit ('There is no data in the Excel table');
 		}
+
 		for ($row = 2; $row <= $highestRow; ++$row) {
-	        $masv = $worksheet->getCellByColumnAndRow(1, $row)->getValue(); 
-	        $ten = $worksheet->getCellByColumnAndRow(2, $row)->getValue(); 
-	        $lop = $worksheet->getCellByColumnAndRow(3, $row)->getValue(); 
-	        $diachi = $worksheet->getCellByColumnAndRow(4, $row)->getValue(); 
-	        $sdt = $worksheet->getCellByColumnAndRow(5, $row)->getValue(); 
-	        $email = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-		 
-		    $sql = $ttsv->insert($masv, $ten, $lop, $diachi, $sdt, $email);
+         $ma_sinh_vien 		= $data->getCellByColumnAndRow(1, $row)->getValue(); 
+         $ten_sinh_vien 	= $data->getCellByColumnAndRow(2, $row)->getValue(); 
+         $ma_lop 			= $data->getCellByColumnAndRow(3, $row)->getValue(); 
+         $dia_chi 			= $data->getCellByColumnAndRow(4, $row)->getValue(); 
+         $so_dien_thoai 	= $data->getCellByColumnAndRow(5, $row)->getValue(); 
+         $email 			= $data->getCellByColumnAndRow(6, $row)->getValue(); 
+
+        $statement = $ttsv->insert($ma_sinh_vien, $ten_sinh_vien, $ma_lop, $dia_chi, $so_dien_thoai, $email);
+
 		}
-		$message = '<script>alert("Data Imported Successfully")</script>';
+		$message = '<div class="alert alert-success">Data Imported Successfully</div>';
+
 	}
 	else
 	{
-		$message = '<script>alert("Only .xls .csv or .xlsx file allowed")</script>';
+		$message = '<div class="alert alert-danger">Only .xls .csv or .xlsx file allowed</div>';
 	}
 }
 else
 {
-	$message = '<script>alert("Please Select File")</script>';
+	$message = '<div class="alert alert-danger">Please Select File</div>';
 }
 
 echo $message;
+
 ?>

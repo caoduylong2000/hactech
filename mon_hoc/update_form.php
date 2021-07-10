@@ -12,7 +12,7 @@ require_once '../module/connect.php';
 ?>
 <form method="POST" action="update_post.php"> 
 	<h2>Cập nhật dữ liệu</h2> 
-	<input type="hidden" value="<?php echo $result['mon_id']; ?>" name="id" >
+	<input type="hidden" value="<?php echo $result['mon_hoc_id']; ?>" name="id" >
 		<div class="row100">
 			<div class="col">
 				<div class="inputBox">

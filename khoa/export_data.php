@@ -1,39 +1,18 @@
-
-<?php require_once '../module/dautrang.php'; ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <form method="post">
-              <div class="row">
-                <div class="col-md-6">User Data</div>
-                <div class="col-md-4">
-                  <select name="file_type" class="form-control input-sm">
-                    <option value="Xlsx">Xlsx</option>
-                    <option value="Xls">Xls</option>
-                    <option value="Csv">Csv</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-    	</div>
-<?php require_once '../module/footer.php'; ?>
 <?php
-$title = 'Export';
 
 //php_spreadsheet_export.php
 
 include '../module/vendor/autoload.php';
-include '../module/connect.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
-$query = "SELECT * FROM khoa ORDER BY ma_khoa DESC";
 
-$statement = $pdo->prepare($query);
+$connect = new PDO("mysql:host=localhost;dbname=hactech", "root", "");
+
+
+$query = "SELECT * FROM khoa";
+
+$statement = $connect->prepare($query);
 
 $statement->execute();
 
@@ -57,7 +36,7 @@ if(isset($_POST["export"]))
     $active_sheet->setCellValue('B' . $count, $row["ten_khoa"]);
     $active_sheet->setCellValue('C' . $count, $row["chu_nhiem_khoa"]);
 
-    $count++;
+    $count = $count + 1;
   }
 
   $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($file, $_POST["file_type"]);
@@ -81,3 +60,28 @@ if(isset($_POST["export"]))
 }
 
 ?>
+<?php require_once '../module/dautrang.php'; ?>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <form method="post">
+              <div class="row100">
+                <div class="col">Chọn định dạng file</div>
+                <div class="col">
+                  <select name="file_type" class="form-control input-sm">
+                    <option value="Xlsx">Xlsx</option>
+                    <option value="Xls">Xls</option>
+                    <option value="Csv">Csv</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <input type="submit" name="export" class="btn btn-primary btn-sm" value="Export" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="panel-body">
+          <div class="table-responsive">
+          </div>
+          </div>
+        </div>
+    <?php require_once '../module/footer.php'; ?>
